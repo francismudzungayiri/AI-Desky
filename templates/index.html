@@ -1,0 +1,123 @@
+{% extends "./layouts/base.html" %}
+{% block content%}
+<div class="min-h-screen bg-gradient-to-b from-light_blue to-white">
+  <!-- Hero Section -->
+  <header class="container h-screen mx-auto px-4 py-16 md:py-24">
+    <div class="flex justify-center items-center mb-32">
+      <div class="bg-gradient-to-r from-blue to-red-400 bg-clip-text text-transparent font-bold text-3xl">AI Desky</div>
+    </div>
+    
+    <div class="flex flex-col items-center text-center">
+      <h1 class="text-5xl md:text-6xl font-bold text-dark-text leading-tight mb-6 max-w-4xl">
+        AI-Powered <span class="text-blue">Support</span> That Never Sleeps
+      </h1>
+      <p class="text-xl text-gray-500 mb-12 max-w-2xl">
+        Transform your customer service with our intelligent helpdesk solution. Resolve issues faster, reduce wait times, and delight your customers.
+      </p>
+      <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-10">
+        <a href="{{ url_for('sign_up')}}" class="bg-blue text-white text-center px-8 py-3 rounded-full font-medium hover:bg-opacity-90 transition duration-300 flex items-center justify-center">
+          Sign Up
+        </a>
+        <a href="{{url_for('sign_in')}}" class="bg-[#FFECDB] text-[#FF9149] text-center px-8 py-3 rounded-full font-medium hover:bg-opacity-90 transition duration-300">
+          Sign In
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Features Section -->
+  <section id="features" class="py-16 bg-[#FFECDB] bg-opacity-50 h-screen">
+    <div class="container mx-auto px-4 flex justify-center items-center flex-col h-full">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-16">Powerful Features</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+          <div class="w-16 h-16 bg-[#AFDDFF] rounded-full flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[#60B5FF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-800 mb-3">AI-Powered Responses</h3>
+          <p class="text-gray-600">Our advanced AI understands context and provides accurate, helpful responses to customer inquiries instantly.</p>
+        </div>
+        
+        <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+          <div class="w-16 h-16 bg-[#AFDDFF] rounded-full flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[#60B5FF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-800 mb-3">24/7 Availability</h3>
+          <p class="text-gray-600">Support your customers around the clock without increasing your team size or costs.</p>
+        </div>
+        
+        <div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+          <div class="w-16 h-16 bg-[#AFDDFF] rounded-full flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[#60B5FF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-800 mb-3">Analytics Dashboard</h3>
+          <p class="text-gray-600">Gain insights into customer issues, response times, and satisfaction rates with our comprehensive analytics.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="py-16 h-screen">
+    <div class="container mx-auto px-4 h-full">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-16">How It Works</h2>
+      
+      <div class="flex flex-col md:flex-row items-center justify-between">
+        <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+          <div class="bg-[#60B5FF] bg-opacity-10 p-1 rounded-full inline-block mb-4">
+            <span class="bg-[#60B5FF] text-white px-4 py-1 rounded-full text-sm">Simple Setup</span>
+          </div>
+          <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6">Integrate in Minutes, Not Days</h3>
+          <ul class="space-y-4">
+            <li class="flex items-start">
+              <div class="bg-[#AFDDFF] rounded-full p-1 mr-4 mt-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#60B5FF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <p class="text-gray-600">Connect our AI helpdesk to your existing systems with just a few clicks</p>
+            </li>
+            <li class="flex items-start">
+              <div class="bg-[#AFDDFF] rounded-full p-1 mr-4 mt-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#60B5FF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <p class="text-gray-600">Train the AI with your knowledge base and FAQs</p>
+            </li>
+            <li class="flex items-start">
+              <div class="bg-[#AFDDFF] rounded-full p-1 mr-4 mt-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#60B5FF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <p class="text-gray-600">Customize the AI's responses to match your brand voice</p>
+            </li>
+            <li class="flex items-start">
+              <div class="bg-[#AFDDFF] rounded-full p-1 mr-4 mt-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#60B5FF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <p class="text-gray-600">Go live and watch your customer satisfaction soar</p>
+            </li>
+          </ul>
+        </div>
+        <div class="md:w-1/2">
+          <img src="https://placehold.co/600x400/FFECDB/FF9149?text=Easy+Integration" alt="Easy Integration" class="rounded-xl shadow-lg w-full">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="py-16 bg-[#60B5FF] bg-opacity-10 h-screen"></section>s
+    
+{% endblock %}

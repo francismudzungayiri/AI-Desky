@@ -1,0 +1,18 @@
+{
+  "name": "ai-desky",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "npx @tailwindcss/cli -i ./static/css/input.css -o ./static/css/main.css --watch",
+    "build":"npx @tailwindcss/cli -i ./static/css/input.css -o ./static/css/main.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.5",
+    "tailwindcss": "^4.1.5"
+  }
+}
