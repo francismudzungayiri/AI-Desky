@@ -1,4 +1,8 @@
+from configs.config import Settings
 from pymango import MongoClient
 
-client = MongoClient('mongodb://localhost:27017')
-db = client('AI-DESKY')
+
+class DB:
+    
+    client = MongoClient(Settings.MONGO_URI)
+    db = client(Settings.MONGO_DB_NAME)

@@ -32,8 +32,9 @@
 
         <!-- Input Area -->
         <div class="p-4 bg-light_blue shadow-2xl rounded-2xl w-[70%] mx-auto my-7">
-            <form id="chat-form" class="flex space-x-4 w-full justify-center items-center">
+            <form action="{{ url_for('chat') }}" method="POST" id="chat-form" class="flex space-x-4 w-full justify-center items-center">
                 <textarea 
+                    name="message"
                     id="message-input"
                     class="flex-1 p-2 focus:outline-none focus:ring-2 focus:ring-blue focus:rounded-lg"
                     placeholder="Type your message..."
@@ -57,7 +58,7 @@
 
 <script>
 document.getElementById('chat-form').addEventListener('submit', function(e) {
-    e.preventDefault();
+    e.preventDefault(); // Prevent normal form submission
     const input = document.getElementById('message-input');
     const message = input.value.trim();
     
@@ -67,7 +68,23 @@ document.getElementById('chat-form').addEventListener('submit', function(e) {
         input.value = '';
         
         // Send message to backend and handle response
-        // Add your AJAX call here
+        fetch("{{ url_for('chat') }}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'message=' + encodeURIComponent(message)
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle response from backend
+            if (data.response) {
+                addMessage('bot', data.response);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     }
 });
 
