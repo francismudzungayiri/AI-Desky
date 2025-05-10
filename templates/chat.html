@@ -67,23 +67,58 @@ document.getElementById('chat-form').addEventListener('submit', function(e) {
         addMessage('user', message);
         input.value = '';
         
+        // Add "Processing..." message on the left side with animated dots
+        const processingId = addMessage('bot', 'Processing<span class="loading-dots">.</span>');
+        
+        // Start the loading animation
+        const dotsElement = document.querySelector(`#${processingId} .loading-dots`);
+        const loadingAnimation = animateDots(dotsElement);
+        
         // Send message to backend and handle response
         fetch("{{ url_for('chat') }}", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
+                'X-Requested-With': 'XMLHttpRequest'
             },
             body: 'message=' + encodeURIComponent(message)
         })
         .then(response => response.json())
         .then(data => {
+            // Stop the loading animation
+            clearInterval(loadingAnimation);
+            
+            // Remove the processing message
+            const processingElement = document.getElementById(processingId);
+            if (processingElement) {
+                processingElement.remove();
+            }
+            
             // Handle response from backend
             if (data.response) {
                 addMessage('bot', data.response);
             }
         })
         .catch(error => {
+            // Stop the loading animation
+          //  clearInterval(loadingAnimation);
+            
             console.error('Error:', error);
+            
+            // Optional: Add retry logic
+            setTimeout(() => {
+                // Retry the fetch request
+                fetch("{{ url_for('chat') }}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: 'message=' + encodeURIComponent(message)
+                })
+                .then(/* same handlers as before */)
+                .catch(/* same error handling, potentially with limited retries */);
+            }, 3000); // Retry after 3 seconds
         });
     }
 });
@@ -91,10 +126,13 @@ document.getElementById('chat-form').addEventListener('submit', function(e) {
 function addMessage(sender, content) {
     const messagesDiv = document.getElementById('chat-messages');
     const messageDiv = document.createElement('div');
+    const messageId = 'msg-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
+    
+    messageDiv.id = messageId;
     messageDiv.className = `flex ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
     
     messageDiv.innerHTML = `
-        <div class="${sender === 'user' ? 'bg-light_blue text-dark-text' : 'bg-gray-200 text-gray-800'} 
+        <div class="${sender === 'user' ? 'bg-light_blue text-dark-text' : 'bg-transparent text-gray-800'} 
                           rounded-lg px-6 py-5 max-w-[70%] shadow-2xl">
             ${content}
         </div>
@@ -102,6 +140,16 @@ function addMessage(sender, content) {
     
     messagesDiv.appendChild(messageDiv);
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    
+    return messageId; // Return the ID so we can reference this message later
+}
+
+function animateDots(element) {
+    let dotCount = 1;
+    return setInterval(() => {
+        dotCount = (dotCount % 5) + 1; // Cycle between 1, 2, and 3 dots
+        element.textContent = '.'.repeat(dotCount);
+    }, 200); // Change dots every 200ms
 }
 </script>
 

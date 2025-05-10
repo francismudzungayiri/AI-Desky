@@ -1,6 +1,10 @@
 from email import message
 from flask import render_template, redirect, url_for, request
 from ai_agents.challenge_agent import Challenge
+from flask import jsonify
+from models.task import Task
+
+
 
 class mainAppController():
     
@@ -31,13 +35,14 @@ class mainAppController():
             print(message)
             
             agent = Challenge()
-            response = agent.extract_info_with_llm(message)  
-            print(response)
+            query_data = agent.extract_info_with_llm(message)  
+            task = Task()
+            task.query_Posting(query_data)
             
             # For AJAX requests, return JSON
             if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                 # Process message and generate response
-                response = "This is a response from the server"  # Replace with actual processing
+                response = f"Details waiting to be send \n {query_data}"  # Replace with actual processing
                 return jsonify({'response': response})
             
         return render_template('chat.html')
