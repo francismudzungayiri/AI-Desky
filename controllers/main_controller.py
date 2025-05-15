@@ -33,16 +33,22 @@ class mainAppController():
         if request.method == "POST":
             message = request.form.get('message')
             print(message)
+            data = {
+                "name": "John Doe",
+                "office": "12345",
+                "challenge": "Email not received"
+            }
             
-            agent = Challenge()
-            query_data = agent.extract_info_with_llm(message)  
+            #agent = Challenge()
+            #query_data = agent.extract_info_with_llm(message)  
             task = Task()
-            task.query_Posting(query_data)
+            task.query_Posting(data)
             
+            #print(query_data)
             # For AJAX requests, return JSON
             if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                 # Process message and generate response
-                response = f"Details waiting to be send \n {query_data}"  # Replace with actual processing
+                response = "Data send to the database"  # Replace with actual processing
                 return jsonify({'response': response})
             
         return render_template('chat.html')
